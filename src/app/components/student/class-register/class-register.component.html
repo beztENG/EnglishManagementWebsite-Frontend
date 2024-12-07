@@ -1,0 +1,21 @@
+<div class="class-registration-container">
+  <h2>Class Registration</h2>
+
+  <!-- List of available classes -->
+  <h3 class="section-title">Available Classes</h3>
+  <ul class="class-list">
+    <li *ngFor="let cls of availableClasses" class="class-item">
+      {{ cls.name }} ({{ cls.id }})
+      <button (click)="registerForClass(cls.id)" class="btn btn-register">Register</button>
+    </li>
+  </ul>
+
+  <!-- List of registered classes -->
+  <h3 class="section-title">Your Registered Classes</h3>
+  <ul class="class-list">
+    <li *ngFor="let reg of registeredClasses" class="class-item">
+      {{ reg.classInfo.name }} ({{ reg.classInfo.id }})
+      <button (click)="cancelRegistration(reg.classInfo.id)" class="btn btn-cancel">Cancel</button>
+    </li>
+  </ul>
+</div>

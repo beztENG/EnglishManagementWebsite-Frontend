@@ -1,0 +1,48 @@
+<div class="calendar-container bg-white shadow-md rounded-lg p-4">
+  <div class="flex justify-between items-center mb-4">
+    <button (click)="changeMonth(-1)" class="text-blue-500">Previous</button>
+    <h2 class="text-xl font-bold text-center">{{ currentMonthYear }}</h2>
+    <button (click)="changeMonth(1)" class="text-blue-500">Next</button>
+  </div>
+  
+  <div class="grid grid-cols-7 text-center mt-4">
+    <div class="font-semibold">SUN</div>
+    <div class="font-semibold">MON</div>
+    <div class="font-semibold">TUE</div>
+    <div class="font-semibold">WED</div>
+    <div class="font-semibold">THU</div>
+    <div class="font-semibold">FRI</div>
+    <div class="font-semibold">SAT</div>
+
+    <ng-container *ngFor="let day of daysInMonth">
+      <div
+        class="cursor-pointer p-2 border rounded-md"
+        [class.selected]="day === selectedDay"
+        [ngClass]="{'text-black': day, 'text-gray-400': !day}"
+        (click)="onDayClick(day)"
+      >
+        {{ day ? day : '' }}
+      </div>
+    </ng-container>
+    
+  </div>
+
+  <div class="mt-4">
+    <h3 class="font-semibold">Events</h3>
+    <div class="mt-2">
+      <ng-container *ngIf="selectedDayEvents.length > 0; else noEvents">
+        <div *ngFor="let event of selectedDayEvents" class="bg-gray-100 p-2 rounded mt-2">
+          <p><strong>Class ID:</strong> {{ event.classId }}</p>
+          <p><strong>Start Date:</strong> {{ event.startDate }}</p>
+          <p><strong>End Date:</strong> {{ event.endDate }}</p>
+        </div>
+      </ng-container>
+      <ng-template #noEvents>
+        <div class="bg-gray-100 p-2 rounded mt-2">
+          <p>No events for the selected date.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  
+</div>

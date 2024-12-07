@@ -1,0 +1,19 @@
+.calendar-container {
+    height: 500px;
+    width: 600px;
+  }
+  
+  .event {
+    margin-top: 10px;
+  }
+
+  .cursor-pointer:hover {
+    background-color: #f0f0f0;
+  }
+
+  .selected {
+    background-color: #3b82f6; 
+    color: white; 
+    border-color: #2563eb; 
+  }
+  

@@ -1,0 +1,29 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="max-w-md mx-auto p-6 border border-gray-300 rounded-lg shadow-lg bg-white">
+  <h2 class="text-2xl font-bold text-center mb-6">Login</h2>
+
+  <div class="mb-4">
+    <label for="userName" class="block text-sm font-medium text-gray-700">Username</label>
+    <input id="userName" formControlName="userName" type="text" placeholder="Enter your username" 
+           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400" />
+    <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="text-red-600 text-sm mt-1">
+      <small>Username is required.</small>
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+    <input id="password" formControlName="password" type="password" placeholder="Enter your password" 
+           class="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400" />
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-red-600 text-sm mt-1">
+      <small>Password is required.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="loginForm.invalid" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 disabled:bg-gray-300">
+    Login
+  </button>
+
+  <div *ngIf="message" class="mt-4">
+    <p class="text-red-600 text-center">{{ message }}</p>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+<div class="view-score-container">
+  <h2>Select a Class to View Your Score</h2>
+
+  <!-- Dropdown to select a class -->
+  <div class="class-select">
+    <label for="classSelect">Select a Class:</label>
+    <select id="classSelect" [(ngModel)]="selectedClassId" (change)="onClassSelect()">
+      <option *ngFor="let item of classesWithTimetables" [value]="item.classInfo.id">
+        {{ item.classInfo.className }} - 
+        {{ item.timetable?.schedule ? 'Scheduled' : 'No schedule available' }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Modal to display the score -->
+  <div *ngIf="showModal" class="score-modal">
+    <div class="modal-content">
+      <h3>Score for Class: {{ selectedClassId }}</h3>
+      <p><strong>Midterm Score:</strong> {{ score?.midterm }}</p>
+      <p><strong>Final Exam Score:</strong> {{ score?.finalExam }}</p>
+      <p><strong>Average Score:</strong> {{ score?.average }}</p>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>
+</div>

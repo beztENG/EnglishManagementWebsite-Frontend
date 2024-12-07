@@ -1,0 +1,64 @@
+<div class="class-management-container max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+  <h3 class="text-lg font-semibold mb-4 text-center">Create New Class Management</h3>
+  <div class="flex flex-wrap gap-4 items-center justify-center">
+    <input
+      [(ngModel)]="newClassManagement.courseId"
+      type="text"
+      placeholder="Course ID"
+      class="border border-gray-300 px-4 py-2 rounded-lg w-full sm:w-1/3"
+    />
+    <input
+      [(ngModel)]="newClassManagement.classIds"
+      type="text"
+      placeholder="Class IDs (comma-separated)"
+      class="border border-gray-300 px-4 py-2 rounded-lg w-full sm:w-1/3"
+    />
+    <button
+      (click)="createClassManagement()"
+      class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+    >
+      Create
+    </button>
+  </div>
+</div>
+
+<div class="class-management-container max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6">
+  <h2 class="text-2xl font-bold mb-4 text-center">Class Management</h2>
+  <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden shadow-md">
+    <thead>
+      <tr class="bg-blue-500 text-white">
+        <th class="py-2 px-4 text-left">Course ID</th>
+        <th class="py-2 px-4 text-left">Class IDs</th>
+        <th class="py-2 px-4 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let classManagement of classManagementList; let i = index" class="hover:bg-gray-200">
+        <td class="py-2 px-4 border-b">{{ classManagement.courseId }}</td>
+        <td class="py-2 px-4 border-b">{{ classManagement.classIds.join(', ') }}</td>
+        <td class="py-2 px-4 border-b text-center">
+          <input
+            type="text"
+            [(ngModel)]="classIdInputs[i]"
+            placeholder="Class ID"
+            class="border border-gray-300 px-2 py-1 rounded mb-2 w-32"
+          />
+          <div class="flex justify-center gap-2">
+            <button
+              (click)="addClass(classManagement.courseId, i)"
+              class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200"
+            >
+              Add
+            </button>
+            <button
+              (click)="removeClass(classManagement.courseId, i)"
+              class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200"
+            >
+              Remove
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

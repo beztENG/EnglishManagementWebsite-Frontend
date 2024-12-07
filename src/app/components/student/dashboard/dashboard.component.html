@@ -1,0 +1,142 @@
+<div class="flex flex-col md:flex-row justify-between">
+  <!-- Left Side: Profile Section -->
+  <div class="w-full md:w-1/2 p-4 border-r border-gray-300">
+    <h2 class="text-2xl font-bold mb-4">Personal Information</h2>
+    
+    <div *ngIf="!profile">
+      <p class="text-gray-500">No profile found.</p>
+      <button
+        class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+        (click)="openForm()"
+      >
+        Create Profile
+      </button>
+    </div>
+    
+    <div *ngIf="profile">
+      <p><strong>Name:</strong> {{ profile.firstName }} {{ profile.lastName }}</p>
+      <p><strong>DOB:</strong> {{ profile.dob }}</p>
+      <p><strong>Email:</strong> {{ profile.email }}</p>
+      <p><strong>Phone:</strong> {{ profile.phoneNum }}</p>
+      <button
+        class="bg-green-500 text-white py-2 px-4 mt-2 rounded hover:bg-green-600 transition"
+        (click)="openForm()"
+      >
+        Update Profile
+      </button>
+    </div>
+
+    <div *ngIf="showCreateForm" class="mt-4 border p-4 rounded shadow bg-white">
+      <h3 class="text-lg font-bold mb-2">
+        {{ profile ? 'Update Profile' : 'Create Profile' }}
+      </h3>
+      <form (ngSubmit)="saveProfile()">
+        <div class="mb-2">
+          <label class="block">First Name</label>
+          <input
+            type="text"
+            [(ngModel)]="formData.firstName"
+            name="firstName"
+            class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <label class="block">Last Name</label>
+          <input
+            type="text"
+            [(ngModel)]="formData.lastName"
+            name="lastName"
+            class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <label class="block">DOB</label>
+          <input
+            type="date"
+            [(ngModel)]="formData.dob"
+            name="dob"
+            class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <label class="block">Email</label>
+          <input
+            type="email"
+            [(ngModel)]="formData.email"
+            name="email"
+            class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div class="mb-2">
+          <label class="block">Phone Number</label>
+          <input 
+            type="text"
+            [(ngModel)]="formData.phoneNum"
+            name="phoneNum"
+            class="border p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition"
+        >
+          Save
+        </button>
+        <button
+          type="button"
+          class="bg-gray-500 text-white py-2 px-4 ml-2 rounded hover:bg-gray-600 transition"
+          (click)="closeForm()"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Right Side: Calendar Section -->
+  <div class="w-full md:w-1/2 p-4">
+    <h2 class="text-2xl font-bold mb-4">Timetable</h2>
+    <div class="flex justify-between items-center mb-4">
+      <button
+        class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400 transition"
+        (click)="changeMonth(-1)"
+      >
+        &lt; Prev
+      </button>
+      <span class="font-semibold text-lg">{{ currentMonthYear }}</span>
+      <button
+        class="bg-gray-300 px-3 py-1 rounded hover:bg-gray-400 transition"
+        (click)="changeMonth(1)"
+      >
+        Next &gt;
+      </button>
+    </div>
+    <div class="grid grid-cols-7 gap-2">
+      <div
+        *ngFor="let day of daysInMonth"
+        (click)="onDayClick(day)"
+        [ngClass]="{
+          'bg-blue-200': selectedDay === day,
+          'cursor-pointer': day
+        }"
+        class="p-4 border text-center rounded hover:bg-blue-100 transition"
+      >
+        {{ day || '' }}
+      </div>
+    </div>
+    <div class="mt-4">
+      <h3 class="text-lg font-bold">Events</h3>
+      <ul>
+        <li *ngFor="let event of events" class="text-sm text-gray-700">
+          {{ event.classId }} ({{ event.startDate }} - {{ event.endDate }})
+        </li>
+        <li *ngIf="events.length === 0" class="text-sm text-gray-500">No events scheduled for this day.</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+/* admin-navbar.component.css */
+nav {
+  background-color: #ffffff; /* White background */
+  width: 256px; /* Set a fixed width for the sidebar */
+  position: fixed; /* Keep it fixed on the left */
+  height: 100%; /* Full height */
+  overflow-y: auto; /* Scroll if necessary */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+a:hover {
+  background-color: #f0f0f0; /* Light gray on hover */
+}
+
+h2 {
+  border-bottom: 1px solid #e0e0e0; /* Underline for the menu title */
+  padding-bottom: 8px; /* Spacing */
+}

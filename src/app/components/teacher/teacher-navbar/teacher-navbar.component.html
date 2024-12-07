@@ -1,0 +1,18 @@
+<nav class="bg-white h-full w-64 p-4 shadow-lg fixed">
+    <div class="flex items-center mb-6">
+      <img src="/assets/icons/logo.png" class="h-10 w-10 mr-2" alt="Logo" />
+      <span class="text-xl font-bold">Teacher Page</span>
+    </div>
+    <h2 class="text-gray-600 font-semibold text-lg mb-4">MENU</h2>
+    <div *ngFor="let item of menuItems">
+      <a
+        [routerLink]="item.href"
+        class="flex items-center gap-3 text-gray-700 py-2 px-3 rounded-md hover:bg-gray-200 transition"
+        routerLinkActive="bg-gray-200 font-semibold"
+      >
+        <img [src]="item.icon" alt="{{ item.label }}" class="w-5 h-5" />
+        <span>{{ item.label }}</span>
+      </a> 
+    </div> 
+  </nav>
+  

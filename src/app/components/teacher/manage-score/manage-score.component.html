@@ -1,0 +1,62 @@
+<div class="manage-score-container">
+  <h2>Manage Scores</h2>
+
+  <!-- Class Selection -->
+  <div class="form-group">
+    <label for="classSelect">Select a Class:</label>
+    <select id="classSelect" [(ngModel)]="selectedClassId">
+      <option *ngFor="let classTimetable of teacherClasses" [value]="classTimetable.classId">
+        {{ classTimetable.classId }}
+      </option>
+    </select>
+  </div>
+
+  <!-- Enter Student ID -->
+  <div class="form-group">
+    <label for="studentIdInput">Enter Student ID:</label>
+    <input id="studentIdInput" type="text" [(ngModel)]="studentId" placeholder="Enter Student ID" />
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="action-buttons">
+    <button class="btn btn-primary" (click)="getStudentScore()">Get Score</button>
+    <button class="btn btn-success" (click)="createStudentScore()">Create Score</button>
+  </div>
+
+  <!-- Score Modal -->
+  <div *ngIf="showScoreModal" class="modal">
+    <div class="modal-content">
+      <h3>Score Details for Student: {{ studentId }} in Class: {{ selectedClassId }}</h3>
+      <table class="score-table">
+        <thead>
+          <tr>
+            <th>Midterm</th>
+            <th>Final Exam</th>
+            <th>Average</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ score?.midterm || 'N/A' }}</td>
+            <td>{{ score?.finalExam || 'N/A' }}</td>
+            <td>{{ score?.average || 'N/A' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Edit Scores</h4>
+      <div class="form-group">
+        <label for="midtermInput">Midterm:</label>
+        <input id="midtermInput" type="number" #midtermInput placeholder="Enter Midterm Score" />
+      </div>
+      <div class="form-group">
+        <label for="finalExamInput">Final Exam:</label>
+        <input id="finalExamInput" type="number" #finalExamInput placeholder="Enter Final Exam Score" />
+      </div>
+      <div class="action-buttons">
+        <button class="btn btn-warning" (click)="editStudentScore(midtermInput.value, finalExamInput.value)">Update Score</button>
+        <button class="btn btn-secondary" (click)="closeScoreModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

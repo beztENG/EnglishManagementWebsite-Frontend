@@ -1,0 +1,50 @@
+<div class="class-registration-container">
+  <h2>Class Registration</h2>
+
+  <form [formGroup]="registerForm" (ngSubmit)="addStudentToClass()" class="registration-form">
+    <div class="form-group">
+      <label for="class-select">Select a Class:</label>
+      <select id="class-select" formControlName="classId" (change)="onClassChange($event)" class="form-control">
+        <option value="" disabled>Select a class</option>
+        <option *ngFor="let class of classes" [value]="class.id">{{ class.className }}</option>
+      </select>
+    </div>
+
+    <div *ngIf="isLoadingWaitingList" class="loading-message">Loading waiting list...</div>
+
+    <div class="form-group">
+      <h3>Add Student to Class</h3>
+      <label for="studentId">Student ID:</label>
+      <input id="studentId" formControlName="studentId" class="form-control" />
+      <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Add</button>
+    </div>
+  </form>
+
+  <div *ngIf="waitingStudents.length > 0" class="waiting-list">
+    <h3>Waiting List Students</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of waitingStudents">
+          <td>{{ student.idStudent }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <button (click)="approveWaitingListStudent(student.idStudent)" class="btn btn-success">Approve</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="waitingStudents.length === 0 && registerForm.value.classId" class="no-waiting-students">
+    <p>No students in the waiting list for this class.</p>
+  </div>
+</div>

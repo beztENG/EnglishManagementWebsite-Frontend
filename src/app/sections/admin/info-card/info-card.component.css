@@ -1,0 +1,28 @@
+.info-card {
+  width: 200px; /* Adjust as necessary */
+  height: 120px; /* Fixed height */
+}
+
+.bg-purple-200 {
+  background-color: #e0e7ff; /* Light purple */
+}
+
+.bg-yellow-200 {
+  background-color: #fefcbf; /* Light yellow */
+}
+
+.text-2xl {
+  color: #4a5568; /* Dark text color */
+}
+
+.text-lg {
+  color: #2d3748; /* Dark text color */
+}
+
+.bg-yellow-200 {
+  background-color: #fefcbf; /* Light yellow */
+}
+
+.bg-purple-200 {
+  background-color: #e0e7ff; /* Light purple */
+}

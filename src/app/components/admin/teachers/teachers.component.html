@@ -1,0 +1,31 @@
+<div class="students-list p-6">
+    <h2 class="text-2xl font-bold mb-4">Teachers</h2>
+    <table class="min-w-full bg-white border border-gray-200">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="py-2 px-4 border-b text-left">Username</th>
+                <th class="py-2 px-4 border-b text-left">Role</th>
+                <th class="py-2 px-4 border-b text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let teacher of teachers" class="hover:bg-gray-50">
+                <td class="py-2 px-4 border-b">{{ teacher.userName }}</td>
+                <td class="py-2 px-4 border-b">{{ teacher.roleId }}</td>
+                <td class="py-2 px-4 border-b">
+                    <div class="flex space-x-2">
+                        <button 
+                            (click)="viewProfile(teacher.id)" 
+                            class="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded">
+                            View Profile
+                        </button>
+                        <button 
+                            class="bg-green-500 text-white hover:bg-green-600 px-4 py-2 rounded">
+                            Create Profile
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>

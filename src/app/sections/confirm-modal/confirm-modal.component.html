@@ -1,0 +1,10 @@
+<div class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-lg font-bold mb-4">Confirmation</h2>
+        <p>{{ message }}</p>
+        <div class="flex justify-between mt-6">
+            <button (click)="confirm()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">OK</button>
+            <button (click)="cancel()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Cancel</button>
+        </div>
+    </div>
+</div>

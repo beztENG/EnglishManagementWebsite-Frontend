@@ -1,0 +1,73 @@
+<div class="class-detail-container max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+    <h2 class="text-3xl font-bold mb-6 text-center text-gray-800 -ml-20">Class Details</h2>
+  
+    <form (ngSubmit)="updateClass()" class="mb-8 space-y-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 ml-20">
+        <div>
+          <label class="block mb-1 text-sm font-semibold text-gray-600">Class Name (Editable)</label>
+          <input
+            type="text"
+            [(ngModel)]="updatedClass.className"
+            name="className"
+            placeholder="Class Name"
+            class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+        <div>
+          <label class="block mb-1 text-sm font-semibold text-gray-600">Room (Editable)</label>
+          <input
+            type="text"
+            [(ngModel)]="updatedClass.room"
+            name="room"
+            placeholder="Room"
+            class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+        <div>
+          <label class="block mb-1 text-sm font-semibold text-gray-600">Duration (Editable)</label>
+          <input
+            type="text"
+            [(ngModel)]="updatedClass.duration"
+            name="duration"
+            placeholder="Duration"
+            class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
+        </div>
+        <div>
+          <label class="block mb-1 text-sm font-semibold text-gray-600">Teacher ID (Read-Only)</label>
+          <input
+            type="text"
+            [(ngModel)]="updatedClass.idTeacher"
+            name="idTeacher"
+            placeholder="Teacher ID"
+            class="border border-gray-300 bg-gray-200 px-4 py-2 rounded-lg focus:outline-none cursor-not-allowed"
+            readonly
+          />
+          <p class="text-xs text-gray-500">This field cannot be modified.</p>
+        </div>
+        <div>
+          <label class="block mb-1 text-sm font-semibold text-gray-600">Students (Read-Only)</label>
+          <input
+            type="text"
+            [(ngModel)]="updatedClass.listStudent"
+            name="listStudent"
+            placeholder="Students (comma-separated)"
+            class="border border-gray-300 bg-gray-200 px-4 py-2 rounded-lg focus:outline-none cursor-not-allowed"
+            readonly
+          />
+          <p class="text-xs text-gray-500">This field cannot be modified.</p>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="mt-6 -ml-5 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200 -ml-20"
+        >
+          Update Class
+        </button>
+      </div>
+    </form>
+  </div>

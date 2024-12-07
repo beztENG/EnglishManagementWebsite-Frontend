@@ -1,0 +1,80 @@
+<div class="course-supervision-container max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center">Course Supervision</h2>
+
+  <!-- Add New Course Form -->
+  <div class="mb-4">
+    <h3 class="text-xl font-semibold mb-4">Add New Course</h3>
+    <form (ngSubmit)="addCourse()">
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Course ID</label>
+        <input
+          type="text"
+          class="w-full px-4 py-2 border rounded-lg"
+          [(ngModel)]="newCourse.courseId"
+          name="courseId"
+          required
+        />
+      </div>
+
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Course Name</label>
+        <input
+          type="text"
+          class="w-full px-4 py-2 border rounded-lg"
+          [(ngModel)]="newCourse.name"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2">Description</label>
+        <textarea
+          class="w-full px-4 py-2 border rounded-lg"
+          [(ngModel)]="newCourse.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+
+      <div class="mb-4 text-right">
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+        >
+          Add Course
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Course List Table -->
+  <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden shadow-md">
+    <thead>
+      <tr class="bg-blue-500 text-white">
+        <th class="py-2 px-4 text-left">Course ID</th>
+        <th class="py-2 px-4 text-left">Name</th>
+        <th class="py-2 px-4 text-left">Description</th>
+        <th class="py-2 px-4 text-left">Status</th>
+        <th class="py-2 px-4 text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let course of courses" class="hover:bg-gray-200">
+        <td class="py-2 px-4 border-b">{{ course.courseId }}</td>
+        <td class="py-2 px-4 border-b">{{ course.name }}</td>
+        <td class="py-2 px-4 border-b">{{ course.description }}</td>
+        <td class="py-2 px-4 border-b">{{ course.status ? 'Active' : 'Inactive' }}</td>
+        <td class="py-2 px-4 border-b text-center">
+          <div class="flex justify-center">
+            <button (click)="navigateToCourseDetail(course.courseId)" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+              View Detail
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,117 @@
+<div class="class-supervision-container max-w-6xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+  <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Class Supervision</h2>
+
+  <!-- Class Creation Form -->
+  <form (ngSubmit)="createClass()" class="mb-8 space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <input
+        type="text"
+        [(ngModel)]="newClass.id"
+        name="id"
+        placeholder="Class ID"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newClass.className"
+        name="className"
+        placeholder="Class Name"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newClass.room"
+        name="room"
+        placeholder="Room"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newClass.duration"
+        name="duration"
+        placeholder="Duration"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newClass.idTeacher"
+        name="idTeacher"
+        placeholder="Teacher ID"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="newClass.listStudent"
+        name="listStudent"
+        placeholder="Students (comma-separated)"
+        class="border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+      />
+    </div>
+    <button
+      type="submit"
+      class="mt-4 w-full bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition duration-200"
+    >
+      Create Class
+    </button>
+  </form>
+
+  <!-- Class List Table -->
+  <div class="overflow-hidden">
+    <table class="min-w-full bg-gray-100 rounded-lg overflow-hidden shadow-md">
+      <thead>
+        <tr class="bg-blue-500 text-white">
+          <th class="py-4 px-6 text-left">Class ID</th>
+          <th class="py-4 px-6 text-left">Class Name</th>
+          <th class="py-4 px-6 text-left">Room</th>
+          <th class="py-4 px-6 text-left">Duration</th>
+          <th class="py-4 px-6 text-left">Teacher</th>
+          <th class="py-4 px-6 text-left">Students</th>
+          <th class="py-4 px-6 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let classItem of classList" class="hover:bg-gray-200 transition duration-150">
+          <td class="py-3 px-6 border-b">{{ classItem.id }}</td>
+          <td class="py-3 px-6 border-b">{{ classItem.className }}</td>
+          <td class="py-3 px-6 border-b">{{ classItem.room }}</td>
+          <td class="py-3 px-6 border-b">{{ classItem.duration }}</td>
+          <td class="py-3 px-6 border-b">
+            <a
+              href="javascript:void(0)"
+              class="text-blue-500 hover:underline"
+              (click)="navigateToProfile(classItem.idTeacher)"
+            >
+              {{ classItem.idTeacher }}
+            </a>
+          </td>
+          <td class="py-3 px-6 border-b">
+            <span *ngFor="let student of classItem.listStudent; let i = index">
+              <a
+                href="javascript:void(0)"
+                class="text-blue-500 hover:underline"
+                (click)="navigateToProfile(student)"
+              >
+                {{ student }}
+              </a>
+              <span *ngIf="i < classItem.listStudent.length - 1">, </span>
+            </span>
+          </td>
+          <td class="py-3 px-6 border-b text-center">
+            <button
+              (click)="viewClassDetails(classItem.id)"
+              class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+            >
+              View Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+      
+    </table>
+  </div>
+</div>
