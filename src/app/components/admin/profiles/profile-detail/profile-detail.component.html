@@ -1,10 +1,14 @@
-<div *ngIf="profile">
-  <h2>Profile Details</h2>
-  <p><strong>Code:</strong> {{ profile.code }}</p>
-  <p><strong>First Name:</strong> {{ profile.firstName }}</p>
-  <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
-  <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
-  <p><strong>Email:</strong> {{ profile.email }}</p>
-  <p><strong>Phone Number:</strong> {{ profile.phoneNum }}</p>
-  <img [src]="profile.avatar" alt="Avatar" *ngIf="profile.avatar" />
+<div *ngIf="profile" class="profile-card">
+  <div class="profile-header">
+    <img [src]="profile.avatar" alt="Avatar" *ngIf="profile.avatar" class="profile-avatar" />
+    <h2 class="profile-title">Profile Details</h2>
+  </div>
+  <div class="profile-details">
+    <p><strong>Code:</strong> {{ profile.code }}</p>
+    <p><strong>First Name:</strong> {{ profile.firstName }}</p>
+    <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile.dob }}</p>
+    <p><strong>Email:</strong> {{ profile.email }}</p>
+    <p><strong>Phone Number:</strong> {{ profile.phoneNum }}</p>
+  </div>
 </div>
