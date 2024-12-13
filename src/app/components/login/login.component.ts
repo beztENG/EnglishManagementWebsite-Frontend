@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Import CommonModule
@@ -16,11 +16,34 @@ export class LoginComponent {
   loginForm: FormGroup;
   message: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  // Monkey behavior properties
+  isTypingUsername = false;
+  isTypingPassword = false;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
     this.loginForm = this.formBuilder.group({
       userName: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
+  }
+
+  onFocusUsername() {
+    this.isTypingUsername = true;
+    this.isTypingPassword = false;
+  }
+
+  onFocusPassword() {
+    this.isTypingUsername = false;
+    this.isTypingPassword = true;
+  }
+
+  onBlur() {
+    this.isTypingUsername = false;
+    this.isTypingPassword = false;
   }
 
   onLogin() {
@@ -34,24 +57,22 @@ export class LoginComponent {
     this.authService.login(userName, password).subscribe({
       next: (response) => {
         const token = response.token;
-        const roleId = response.roleId; 
+        const roleId = response.roleId;
         this.message = 'Login successful!';
 
         this.authService.storeToken(token);
-
-        console.log(roleId)
 
         this.navigateBasedOnRole(roleId);
       },
       error: (err) => {
         console.error('Login error:', err);
-        this.message = 'Login failed: ' + (err.error.message || 'Unknown error occurred');
-      }
+        this.message =
+          'Login failed: ' + (err.error.message || 'Unknown error occurred');
+      },
     });
   }
 
   private navigateBasedOnRole(roleId: string) {
-    console.log(roleId)
     switch (roleId) {
       case 'admin':
         this.router.navigate(['/admin']);
